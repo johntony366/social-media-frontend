@@ -13,6 +13,7 @@ export default function MyPosts() {
   const dispatch = useAppDispatch();
 
   const { user } = useSelector((state: RootState) => state.auth);
+  const fetchedUser = useSelector((state: RootState) => state.user);
 
   const { userPosts, status, error } = useSelector(
     (state: RootState) => state.posts
@@ -28,6 +29,8 @@ export default function MyPosts() {
     }
 
     dispatch(fetchUserPosts({ page: 1, pageSize: 10 }));
+    //@ts-ignore
+    dispatch(fetchUser({}));
     console.log(user);
   }, []);
 
@@ -43,11 +46,15 @@ export default function MyPosts() {
       >
         My profile
       </Heading>
-      <Box>
-        {/* <Text textAlign={"center"}>Username: {user?.username}</Text>
-        <Text textAlign={"center"}>Email: {user?.email}</Text>
-        <Text textAlign={"center"}>Followers: {user?.followers.length}</Text>
-        <Text textAlign={"center"}>Following: {user?.following.length}</Text> */}
+      <Box pb={4}>
+        <Text textAlign={"center"}>Username: {fetchedUser.user?.username}</Text>
+        <Text textAlign={"center"}>Email: {fetchedUser.user?.email}</Text>
+        <Text textAlign={"center"}>
+          Followers: {fetchedUser.user?.followers.length}
+        </Text>
+        <Text textAlign={"center"}>
+          Following: {fetchedUser.user?.following.length}
+        </Text>
       </Box>
       <Heading
         textAlign={"center"}

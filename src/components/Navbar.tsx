@@ -18,8 +18,8 @@ import {
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
 
-const Links = ["Explore", "Following", "My posts", "Create post"];
-const Routes = ["/explore", "/following", "/myposts", "/createpost"];
+const Links = ["Explore", "Following", "Profile", "Create post"];
+const Routes = ["/explore", "/following", "/profile", "/createpost"];
 
 const NavLink = ({ children, i }: { children: ReactNode; i: number }) => (
   <Link
