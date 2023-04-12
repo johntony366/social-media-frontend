@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userService from "./userService";
 import { UserData } from "../auth/authService";
+import { toast } from "react-toastify";
 
 const initialState: { user: UserData | null; status: string; error: any } = {
   user: null,
@@ -81,10 +82,12 @@ const userSlice = createSlice({
       .addCase(followUser.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.user = action.payload;
+        toast.success("Followed user");
       })
       .addCase(unfollowUser.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.user = action.payload;
+        toast.success("Unfollowed user");
       });
   },
 });
