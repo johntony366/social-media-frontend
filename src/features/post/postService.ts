@@ -9,16 +9,17 @@ export interface PostData {
   likes: String[];
 }
 
-const fetchUserPosts = async (token: string) => {
-  const config = {
+const fetchUserPosts = async (
+  page: number,
+  pageSize: number,
+  token: string
+) => {
+  const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/post", {
+    params: { page, pageSize },
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  };
-  const response = await axios.get(
-    process.env.NEXT_PUBLIC_API_URL + "/post",
-    config
-  );
+  });
 
   return response.data;
 };

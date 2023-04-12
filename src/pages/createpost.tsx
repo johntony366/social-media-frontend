@@ -14,7 +14,7 @@ function Login() {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const { user } = useSelector((state: RootState) => state.auth);
+  const { userID } = useSelector((state: RootState) => state.auth);
 
   const onChange = (e: any) => {
     setFormData((prevState) => ({
@@ -33,7 +33,7 @@ function Login() {
     };
 
     dispatch(createPost(postData));
-    router.push("/myposts");
+    router.push("/profile");
   };
 
   useEffect(() => {

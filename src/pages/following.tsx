@@ -1,7 +1,7 @@
 import { RootState, useAppDispatch } from "@/app/store";
 import Navbar from "@/components/Navbar";
 import Post from "@/components/Post";
-import { fetchExplorePosts } from "@/features/post/postSlice";
+import { fetchFollowingPosts } from "@/features/post/postSlice";
 import { Box, Heading, Text, VStack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
@@ -12,7 +12,7 @@ export default function Explore() {
   const dispatch = useAppDispatch();
 
   const { user } = useSelector((state: RootState) => state.auth);
-  const { explorePosts, status, error } = useSelector(
+  const { followingPosts, status, error } = useSelector(
     (state: RootState) => state.posts
   );
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function Explore() {
       router.push("/login");
     }
 
-    dispatch(fetchExplorePosts({ page: 1, pageSize: 10 }));
+    dispatch(fetchFollowingPosts({ page: 1, pageSize: 10 }));
   }, []);
 
   return (
@@ -37,11 +37,11 @@ export default function Explore() {
         textDecoration={"underline"}
         mb={4}
       >
-        Explore
+        Following
       </Heading>
       <VStack w={"100%"} gap={2}>
-        {explorePosts.map((post, i) => (
-          <Post key={i} post={post} hideFollow={false} hideUnfollow={false} />
+        {followingPosts.map((post, i) => (
+          <Post key={i} post={post} hideFollow={true} hideUnfollow={false} />
         ))}
       </VStack>
     </Box>

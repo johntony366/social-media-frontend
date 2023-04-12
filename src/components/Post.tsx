@@ -5,7 +5,15 @@ import { followUser, unfollowUser } from "@/features/user/userSlice";
 import { Box, HStack, Heading, Link, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 
-export default function Post({ post }: { post: PostData }) {
+export default function Post({
+  post,
+  hideFollow,
+  hideUnfollow,
+}: {
+  post: PostData;
+  hideFollow: boolean;
+  hideUnfollow: boolean;
+}) {
   const dispatch = useAppDispatch();
 
   return (
@@ -21,10 +29,16 @@ export default function Post({ post }: { post: PostData }) {
       <Text size={"sm"}>@{post.author.username}</Text>
 
       <HStack justify={"center"}>
-        <Link onClick={() => dispatch(followUser(post.author._id))}>
+        <Link
+          display={hideFollow ? "none" : "block"}
+          onClick={() => dispatch(followUser(post.author._id))}
+        >
           Follow
         </Link>
-        <Link onClick={() => dispatch(unfollowUser(post.author._id))}>
+        <Link
+          display={hideFollow ? "none" : "block"}
+          onClick={() => dispatch(unfollowUser(post.author._id))}
+        >
           Unfollow
         </Link>
       </HStack>

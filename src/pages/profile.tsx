@@ -2,6 +2,7 @@ import { RootState, useAppDispatch } from "@/app/store";
 import Navbar from "@/components/Navbar";
 import Post from "@/components/Post";
 import { fetchUserPosts } from "@/features/post/postSlice";
+import { fetchUser } from "@/features/user/userSlice";
 import { Box, Heading, Text, VStack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
@@ -26,7 +27,8 @@ export default function MyPosts() {
       router.push("/login");
     }
 
-    dispatch(fetchUserPosts());
+    dispatch(fetchUserPosts({ page: 1, pageSize: 10 }));
+    console.log(user);
   }, []);
 
   return (
@@ -39,11 +41,31 @@ export default function MyPosts() {
         textDecoration={"underline"}
         mb={4}
       >
+        My profile
+      </Heading>
+      <Box>
+        {/* <Text textAlign={"center"}>Username: {user?.username}</Text>
+        <Text textAlign={"center"}>Email: {user?.email}</Text>
+        <Text textAlign={"center"}>Followers: {user?.followers.length}</Text>
+        <Text textAlign={"center"}>Following: {user?.following.length}</Text> */}
+      </Box>
+      <Heading
+        textAlign={"center"}
+        as="h1"
+        size="xl"
+        textDecoration={"underline"}
+        mb={4}
+      >
         Your posts
       </Heading>
       <VStack w={"100%"} gap={2}>
         {userPosts.map((post) => (
-          <Post key={post._id} post={post} />
+          <Post
+            key={post._id}
+            post={post}
+            hideFollow={true}
+            hideUnfollow={true}
+          />
         ))}
       </VStack>
     </Box>

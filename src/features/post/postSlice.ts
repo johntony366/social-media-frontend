@@ -17,9 +17,12 @@ const initialState: {
 
 export const fetchUserPosts = createAsyncThunk(
   "posts/fetchUserPosts",
-  async ({}, thunkAPI: any) => {
+  async (
+    { page, pageSize }: { page: number; pageSize: number },
+    thunkAPI: any
+  ) => {
     const token = thunkAPI.getState().auth.user.token;
-    const response = await postService.fetchUserPosts(token);
+    const response = await postService.fetchUserPosts(page, pageSize, token);
     return response;
   }
 );
