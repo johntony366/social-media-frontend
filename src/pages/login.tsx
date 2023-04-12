@@ -4,6 +4,22 @@ import { login, reset } from "../features/auth/authSlice";
 import { useRouter } from "next/router";
 import { RootState, useAppDispatch } from "@/app/store";
 import { UserData } from "@/features/auth/authService";
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  HStack,
+  Heading,
+  Image,
+  Input,
+  Link,
+  Spinner,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+import NextLink from "next/link";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -35,7 +51,7 @@ function Login() {
     }));
   };
 
-  const onSubmit = (e: any) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
 
     const userData = {
@@ -48,42 +64,60 @@ function Login() {
 
   return (
     <>
-      <section className="heading">
-        <h1>Login</h1>
-      </section>
-
-      <section className="form">
-        <form onSubmit={onSubmit}>
-          <div className="form-group">
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              name="email"
-              value={email}
-              placeholder="Enter your email"
-              onChange={onChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              name="password"
-              value={password}
-              placeholder="Enter password"
-              onChange={onChange}
-            />
-          </div>
-
-          <div className="form-group">
-            <button type="submit" className="btn btn-block">
-              Submit
-            </button>
-          </div>
-        </form>
-      </section>
+      <form onSubmit={handleSubmit}>
+        <Flex
+          w={"100vw"}
+          h={"100vh"}
+          justify={"center"}
+          align={"center"}
+          flexDirection={"column"}
+          gap={12}
+        >
+          <Heading size={"3xl"}>Login</Heading>
+          <VStack gap={2} w={"70%"} maxW={"600px"}>
+            <FormControl isRequired>
+              <FormLabel>Email address</FormLabel>
+              <Input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="johndoe@gmail.com"
+                size="lg"
+                value={formData.email}
+                onChange={onChange}
+                isDisabled={isLoading}
+              />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel>Password</FormLabel>
+              <Input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="*******"
+                size="lg"
+                value={formData.password}
+                onChange={onChange}
+                isDisabled={isLoading}
+              />
+            </FormControl>
+            <Button
+              colorScheme={"blackAlpha"}
+              type="submit"
+              width="full"
+              mt={4}
+            >
+              {isLoading ? <Spinner /> : "Login"}
+            </Button>
+            <Text textAlign={"center"}>
+              Not a user?{" "}
+              <Link as={NextLink} href="/register">
+                Sign up
+              </Link>
+            </Text>
+          </VStack>
+        </Flex>
+      </form>
     </>
   );
 }
