@@ -17,7 +17,7 @@ export default function Explore() {
   );
   useEffect(() => {
     if (status == "failed") {
-      console.log(error);
+      // console.log(error);
     }
 
     if (!user) {

@@ -106,7 +106,6 @@ const fetchExplorePosts = async (
       },
     }
   );
-  console.log("Response is: " + response.data);
 
   return response.data;
 };

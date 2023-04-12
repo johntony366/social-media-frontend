@@ -21,7 +21,7 @@ export default function MyPosts() {
 
   useEffect(() => {
     if (status == "failed") {
-      console.log(error);
+      // console.log(error);
     }
 
     if (!user) {
@@ -31,7 +31,7 @@ export default function MyPosts() {
     dispatch(fetchUserPosts({ page: 1, pageSize: 10 }));
     //@ts-ignore
     dispatch(fetchUser({}));
-    console.log(user);
+    // console.log(user);
   }, []);
 
   return (
