@@ -19,13 +19,19 @@ const fetchUserPosts = async (token: string) => {
     process.env.NEXT_PUBLIC_API_URL + "/post",
     config
   );
+
   return response.data;
 };
 
-const createPost = async (data: any) => {
+const createPost = async (data: any, token: string) => {
   const response = await axios.post(
     process.env.NEXT_PUBLIC_API_URL + "/post",
-    data
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
   );
   return response.data;
 };

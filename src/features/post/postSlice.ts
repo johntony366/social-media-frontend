@@ -17,7 +17,7 @@ const initialState: {
 
 export const fetchUserPosts = createAsyncThunk(
   "posts/fetchUserPosts",
-  async (thunkAPI: any) => {
+  async ({}, thunkAPI: any) => {
     const token = thunkAPI.getState().auth.user.token;
     const response = await postService.fetchUserPosts(token);
     return response;
@@ -26,8 +26,9 @@ export const fetchUserPosts = createAsyncThunk(
 
 export const createPost = createAsyncThunk(
   "posts/createPost",
-  async (data: any) => {
-    const response = await postService.createPost(data);
+  async (data: any, thunkAPI: any) => {
+    const token = thunkAPI.getState().auth.user.token;
+    const response = await postService.createPost(data, token);
     return response;
   }
 );
