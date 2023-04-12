@@ -9,42 +9,75 @@ export interface PostData {
   likes: String[];
 }
 
-const fetchUserPosts = async () => {
-  const response = await axios.get("/api/posts");
+const fetchUserPosts = async (token: string) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.get(
+    process.env.NEXT_PUBLIC_API_URL + "/post",
+    config
+  );
   return response.data;
 };
 
 const createPost = async (data: any) => {
-  const response = await axios.post("/api/posts", data);
+  const response = await axios.post(
+    process.env.NEXT_PUBLIC_API_URL + "/post",
+    data
+  );
   return response.data;
 };
 
 const deletePost = async (postId: string) => {
-  const response = await axios.delete(`/api/posts/${postId}`);
+  const response = await axios.delete(
+    process.env.NEXT_PUBLIC_API_URL + `/post/${postId}`
+  );
   return response.data;
 };
 
 const updatePost = async (postId: string, data: any) => {
-  const response = await axios.put(`/api/posts/${postId}`, data);
+  const response = await axios.put(
+    process.env.NEXT_PUBLIC_API_URL + `/post/${postId}`,
+    data
+  );
   return response.data;
 };
 
 const likePost = async (postId: string) => {
-  const response = await axios.put(`/api/posts/${postId}/like`);
+  const response = await axios.put(
+    process.env.NEXT_PUBLIC_API_URL + `/post/${postId}/like`
+  );
   return response.data;
 };
 
 const fetchFollowingPosts = async (page: number, pageSize: number) => {
-  const response = await axios.get("/api/posts/following", {
-    params: { page, pageSize },
-  });
+  const response = await axios.get(
+    process.env.NEXT_PUBLIC_API_URL + "/post/following",
+    {
+      params: { page, pageSize },
+    }
+  );
   return response.data;
 };
 
-const fetchExplorePosts = async (page: number, pageSize: number) => {
-  const response = await axios.get("/api/posts/explore", {
-    params: { page, pageSize },
-  });
+const fetchExplorePosts = async (
+  page: number,
+  pageSize: number,
+  token: string
+) => {
+  const response = await axios.get(
+    process.env.NEXT_PUBLIC_API_URL + "/post/explore",
+    {
+      params: { page, pageSize },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  console.log("Response is: " + response.data);
+
   return response.data;
 };
 
