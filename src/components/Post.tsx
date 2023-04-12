@@ -1,7 +1,8 @@
 import { useAppDispatch } from "@/app/store";
 import { PostData } from "@/features/post/postService";
+import { likePost } from "@/features/post/postSlice";
 import { followUser, unfollowUser } from "@/features/user/userSlice";
-import { Box, Heading, Link, Text } from "@chakra-ui/react";
+import { Box, HStack, Heading, Link, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 
 export default function Post({ post }: { post: PostData }) {
@@ -19,10 +20,18 @@ export default function Post({ post }: { post: PostData }) {
       <Text size={"lg"}>{post.content}</Text>
       <Text size={"sm"}>@{post.author.username}</Text>
 
-      <Link onClick={() => dispatch(followUser(post.author._id))}>Follow</Link>
-      <Link onClick={() => dispatch(unfollowUser(post.author._id))}>
-        Unfollow
-      </Link>
+      <HStack justify={"center"}>
+        <Link onClick={() => dispatch(followUser(post.author._id))}>
+          Follow
+        </Link>
+        <Link onClick={() => dispatch(unfollowUser(post.author._id))}>
+          Unfollow
+        </Link>
+      </HStack>
+
+      <VStack>
+        <Link onClick={() => dispatch(likePost(post._id))}>Like</Link>
+      </VStack>
     </Box>
   );
 }

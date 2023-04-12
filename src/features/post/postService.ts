@@ -36,33 +36,56 @@ const createPost = async (data: any, token: string) => {
   return response.data;
 };
 
-const deletePost = async (postId: string) => {
+const deletePost = async (postId: string, token: string) => {
   const response = await axios.delete(
-    process.env.NEXT_PUBLIC_API_URL + `/post/${postId}`
+    process.env.NEXT_PUBLIC_API_URL + `/post/${postId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
   );
   return response.data;
 };
 
-const updatePost = async (postId: string, data: any) => {
+const updatePost = async (postId: string, data: any, token: string) => {
   const response = await axios.put(
     process.env.NEXT_PUBLIC_API_URL + `/post/${postId}`,
-    data
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
   );
   return response.data;
 };
 
-const likePost = async (postId: string) => {
+const likePost = async (postId: string, token: string) => {
   const response = await axios.put(
-    process.env.NEXT_PUBLIC_API_URL + `/post/${postId}/like`
+    process.env.NEXT_PUBLIC_API_URL + `/post/${postId}/like`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
   );
   return response.data;
 };
 
-const fetchFollowingPosts = async (page: number, pageSize: number) => {
+const fetchFollowingPosts = async (
+  page: number,
+  pageSize: number,
+  token: String
+) => {
   const response = await axios.get(
     process.env.NEXT_PUBLIC_API_URL + "/post/following",
     {
       params: { page, pageSize },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     }
   );
   return response.data;

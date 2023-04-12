@@ -1,22 +1,36 @@
 import axios from "axios";
 import { UserData } from "../auth/authService";
 
-const fetchUser = async () => {
-  const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/user");
+const fetchUser = async (token: string) => {
+  const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/user", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 };
 
-const updateUser = async (data: UserData) => {
+const updateUser = async (data: UserData, token: string) => {
   const response = await axios.put(
     process.env.NEXT_PUBLIC_API_URL + "/user",
-    data
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
   );
   return response.data;
 };
 
-const deleteUser = async () => {
+const deleteUser = async (token: string) => {
   const response = await axios.delete(
-    process.env.NEXT_PUBLIC_API_URL + "/user"
+    process.env.NEXT_PUBLIC_API_URL + "/user",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
   );
   return response.data;
 };

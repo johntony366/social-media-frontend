@@ -35,32 +35,43 @@ export const createPost = createAsyncThunk(
 
 export const deletePost = createAsyncThunk(
   "posts/deletePost",
-  async (postId: string) => {
-    const response = await postService.deletePost(postId);
+  async (postId: string, thunkAPI: any) => {
+    const token = thunkAPI.getState().auth.user.token;
+    const response = await postService.deletePost(postId, token);
     return response;
   }
 );
 
 export const updatePost = createAsyncThunk(
   "posts/updatePost",
-  async ({ postId, data }: { postId: string; data: any }) => {
-    const response = await postService.updatePost(postId, data);
+  async ({ postId, data }: { postId: string; data: any }, thunkAPI: any) => {
+    const token = thunkAPI.getState().auth.user.token;
+    const response = await postService.updatePost(postId, data, token);
     return response;
   }
 );
 
 export const likePost = createAsyncThunk(
   "posts/likePost",
-  async (postId: string) => {
-    const response = await postService.likePost(postId);
+  async (postId: string, thunkAPI: any) => {
+    const token = thunkAPI.getState().auth.user.token;
+    const response = await postService.likePost(postId, token);
     return response;
   }
 );
 
 export const fetchFollowingPosts = createAsyncThunk(
   "posts/fetchFollowingPosts",
-  async ({ page, pageSize }: { page: number; pageSize: number }) => {
-    const response = await postService.fetchFollowingPosts(page, pageSize);
+  async (
+    { page, pageSize }: { page: number; pageSize: number },
+    thunkAPI: any
+  ) => {
+    const token = thunkAPI.getState().auth.user.token;
+    const response = await postService.fetchFollowingPosts(
+      page,
+      pageSize,
+      token
+    );
     return response;
   }
 );

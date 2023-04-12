@@ -8,23 +8,32 @@ const initialState: { user: UserData | null; status: string; error: any } = {
   error: null,
 };
 
-export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
-  const response = await userService.fetchUser();
-  return response;
-});
-
-export const updateUser = createAsyncThunk(
-  "user/updateUser",
-  async (data: any) => {
-    const response = await userService.updateUser(data);
+export const fetchUser = createAsyncThunk(
+  "user/fetchUser",
+  async ({}, thunkAPI: any) => {
+    const token = thunkAPI.getState().auth.user.token;
+    const response = await userService.fetchUser(token);
     return response;
   }
 );
 
-export const deleteUser = createAsyncThunk("user/deleteUser", async () => {
-  const response = await userService.deleteUser();
-  return response;
-});
+export const updateUser = createAsyncThunk(
+  "user/updateUser",
+  async (data: any, thunkAPI: any) => {
+    const token = thunkAPI.getState().auth.user.token;
+    const response = await userService.updateUser(data, token);
+    return response;
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  "user/deleteUser",
+  async ({}, thunkAPI: any) => {
+    const token = thunkAPI.getState().auth.user.token;
+    const response = await userService.deleteUser(token);
+    return response;
+  }
+);
 
 export const followUser = createAsyncThunk(
   "user/followUser",
