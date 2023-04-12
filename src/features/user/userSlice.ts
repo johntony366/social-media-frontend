@@ -28,16 +28,18 @@ export const deleteUser = createAsyncThunk("user/deleteUser", async () => {
 
 export const followUser = createAsyncThunk(
   "user/followUser",
-  async (userId: string) => {
-    const response = await userService.followUser(userId);
+  async (userId: any, thunkAPI: any) => {
+    const token = thunkAPI.getState().auth.user.token;
+    const response = await userService.followUser(userId, token);
     return response;
   }
 );
 
 export const unfollowUser = createAsyncThunk(
   "user/unfollowUser",
-  async (userId: string) => {
-    const response = await userService.unfollowUser(userId);
+  async (userId: any, thunkAPI: any) => {
+    const token = thunkAPI.getState().auth.user.token;
+    const response = await userService.unfollowUser(userId, token);
     return response;
   }
 );

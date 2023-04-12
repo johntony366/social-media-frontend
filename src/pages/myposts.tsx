@@ -26,7 +26,7 @@ export default function MyPosts() {
       router.push("/login");
     }
 
-    dispatch(fetchUserPosts({ page: 1, pageSize: 10 }));
+    dispatch(fetchUserPosts());
   }, []);
 
   return (

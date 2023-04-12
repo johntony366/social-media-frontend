@@ -1,9 +1,11 @@
+import { useAppDispatch } from "@/app/store";
 import { PostData } from "@/features/post/postService";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { followUser, unfollowUser } from "@/features/user/userSlice";
+import { Box, Heading, Link, Text } from "@chakra-ui/react";
 import React from "react";
 
 export default function Post({ post }: { post: PostData }) {
-  console.log(post);
+  const dispatch = useAppDispatch();
 
   return (
     <Box
@@ -16,6 +18,11 @@ export default function Post({ post }: { post: PostData }) {
       <Heading size={"md"}>{post.title}</Heading>
       <Text size={"lg"}>{post.content}</Text>
       <Text size={"sm"}>@{post.author.username}</Text>
+
+      <Link onClick={() => dispatch(followUser(post.author._id))}>Follow</Link>
+      <Link onClick={() => dispatch(unfollowUser(post.author._id))}>
+        Unfollow
+      </Link>
     </Box>
   );
 }
