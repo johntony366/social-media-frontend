@@ -15,7 +15,6 @@ export default function Explore() {
   const { explorePosts, status, error } = useSelector(
     (state: RootState) => state.posts
   );
-
   useEffect(() => {
     if (status == "failed") {
       console.log(error);
@@ -41,8 +40,8 @@ export default function Explore() {
         Explore
       </Heading>
       <VStack w={"100%"} gap={2}>
-        {explorePosts.map((post) => (
-          <Post key={post._id} post={post} />
+        {explorePosts.map((post, i) => (
+          <Post key={i} post={post} />
         ))}
       </VStack>
     </Box>

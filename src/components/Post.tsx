@@ -29,9 +29,10 @@ export default function Post({ post }: { post: PostData }) {
         </Link>
       </HStack>
 
-      <VStack>
+      <HStack justify={"center"}>
         <Link onClick={() => dispatch(likePost(post._id))}>Like</Link>
-      </VStack>
+        <Text>{post.likes.length}</Text>
+      </HStack>
     </Box>
   );
 }
