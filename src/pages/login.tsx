@@ -38,7 +38,7 @@ function Login() {
 
   useEffect(() => {
     if (isSuccess || user) {
-      router.push("/");
+      router.push("/explore");
     }
 
     dispatch(reset());
