@@ -14,6 +14,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import Navbar from "@/components/Navbar";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -54,6 +55,7 @@ function Login() {
 
   return (
     <>
+      <Navbar />
       <form onSubmit={handleSubmit}>
         <Flex
           w={"100vw"}
