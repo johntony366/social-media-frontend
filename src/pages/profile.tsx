@@ -35,7 +35,7 @@ export default function MyPosts() {
   }, []);
 
   return (
-    <Box minW={"100vw"} minH={"100vh"}>
+    <Box minW={"100vw"} minH={"100vh"} pb={16}>
       <Navbar />
       <Heading
         textAlign={"center"}
