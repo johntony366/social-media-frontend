@@ -50,10 +50,10 @@ export default function MyPosts() {
         <Text textAlign={"center"}>Username: {fetchedUser.user?.username}</Text>
         <Text textAlign={"center"}>Email: {fetchedUser.user?.email}</Text>
         <Text textAlign={"center"}>
-          Followers: {fetchedUser.user?.followers.length}
+          Followers: {fetchedUser.user?.followers?.length}
         </Text>
         <Text textAlign={"center"}>
-          Following: {fetchedUser.user?.following.length}
+          Following: {fetchedUser.user?.following?.length}
         </Text>
       </Box>
       <Heading

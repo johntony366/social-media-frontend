@@ -36,7 +36,7 @@ export default function Post({
           Follow
         </Link>
         <Link
-          display={hideFollow ? "none" : "block"}
+          display={hideUnfollow ? "none" : "block"}
           onClick={() => dispatch(unfollowUser(post.author._id))}
         >
           Unfollow

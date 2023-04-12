@@ -14,7 +14,7 @@ function Login() {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const { userID } = useSelector((state: RootState) => state.auth);
+  const { user } = useSelector((state: RootState) => state.auth);
 
   const onChange = (e: any) => {
     setFormData((prevState) => ({
@@ -45,7 +45,7 @@ function Login() {
   return (
     <>
       <section className="heading">
-        <h1>Login</h1>
+        <h1>Create post</h1>
       </section>
 
       <section className="form">
